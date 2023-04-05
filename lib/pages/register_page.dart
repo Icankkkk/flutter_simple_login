@@ -5,15 +5,16 @@ import 'package:simple_login/components/my_button.dart';
 import 'package:simple_login/components/square_tile.dart';
 import 'package:simple_login/components/text_field.dart';
 
-class LoginPage extends StatefulWidget {
+// ignore: must_be_immutable
+class RegisterPage extends StatefulWidget {
   void Function()? onTap;
-  LoginPage({super.key, required this.onTap});
+  RegisterPage({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   // exception code
   final String userNotFoundCode = 'user-not-found';
 
@@ -25,11 +26,11 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
 
   // sign user method
-  void signUser() async {
+  void signUserUp() async {
     // show loading circle
     showLoading();
 
-    // try sign ini
+    // try sign up
     try {
       final email = emailController.text;
       final password = passwordController.text;
@@ -88,18 +89,18 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 34),
+                const SizedBox(height: 25),
                 // logo
                 const Icon(
                   Icons.lock,
-                  size: 100,
+                  size: 50,
                 ),
 
                 const SizedBox(height: 25),
 
                 // Welcome back, you'v been missed!
                 Text(
-                  "Welcome back, you've been missed!",
+                  "Create user account!",
                   style: GoogleFonts.poppins(
                       color: Colors.grey[700], fontSize: 16),
                 ),
@@ -124,24 +125,19 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 10),
 
-                // forgot password?
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Forgot Password?',
-                        style: GoogleFonts.poppins(color: Colors.grey[600]),
-                      ),
-                    ],
-                  ),
+                // consfirm password textfield
+                MyTextField(
+                  controller: passwordController,
+                  hintText: 'Confirm password',
+                  obscureText: true,
                 ),
+
+                const SizedBox(height: 10),
 
                 const SizedBox(height: 25),
 
                 // sign button
-                MyElevatedButton(onPress: signUser, text: 'Sign in'),
+                MyElevatedButton(onPress: signUserUp, text: 'Sign up'),
 
                 const SizedBox(height: 35),
 
@@ -197,14 +193,14 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Not a member?',
+                      'Already have an account?',
                       style: GoogleFonts.poppins(),
                     ),
                     const SizedBox(width: 4),
                     GestureDetector(
                       onTap: widget.onTap,
                       child: Text(
-                        'Register now',
+                        'Login now',
                         style: GoogleFonts.poppins(
                           color: Colors.blue.shade400,
                           fontWeight: FontWeight.bold,

@@ -35,7 +35,9 @@ class MyButton extends StatelessWidget {
 
 // using elevatedButton
 class MyElevatedButton extends StatelessWidget {
-  const MyElevatedButton({super.key, required this.onPress});
+  final String text;
+  const MyElevatedButton(
+      {super.key, required this.onPress, required this.text});
 
   final Function()? onPress;
 
@@ -57,7 +59,7 @@ class MyElevatedButton extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      child: const Text('Sign in'),
+      child: Text(text),
     );
   }
 }
