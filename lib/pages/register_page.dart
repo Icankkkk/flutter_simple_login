@@ -17,26 +17,31 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   // exception code
   final String userNotFoundCode = 'user-not-found';
-
   final String wrongPasswordCode = 'wrong-password';
 
   // Text editing controller
   final emailController = TextEditingController();
-
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   // sign user method
   void signUserUp() async {
     // show loading circle
     showLoading();
 
-    // try sign up
-    try {
-      final email = emailController.text;
-      final password = passwordController.text;
+    final email = emailController.text;
+    final password = passwordController.text;
+    final confirmPassword = confirmPasswordController.text;
 
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+    // try creating the user
+    try {
+      if (password == confirmPassword) {
+        FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+      } else {
+        Navigator.pop(context);
+        showErrorMessage("password don't match!");
+      }
 
       // hide loading circle
       // ignore: use_build_context_synchronously
@@ -98,9 +103,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 const SizedBox(height: 25),
 
-                // Welcome back, you'v been missed!
+                // Let's create an account for you
                 Text(
-                  "Create user account!",
+                  "Let's create an account for you!",
                   style: GoogleFonts.poppins(
                       color: Colors.grey[700], fontSize: 16),
                 ),
@@ -127,12 +132,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 // consfirm password textfield
                 MyTextField(
-                  controller: passwordController,
+                  controller: confirmPasswordController,
                   hintText: 'Confirm password',
                   obscureText: true,
                 ),
-
-                const SizedBox(height: 10),
 
                 const SizedBox(height: 25),
 

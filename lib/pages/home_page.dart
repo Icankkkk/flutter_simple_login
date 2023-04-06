@@ -17,7 +17,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home page'),
+        title: Text(
+          'Home page',
+          style: GoogleFonts.poppins(),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => signOut(),
