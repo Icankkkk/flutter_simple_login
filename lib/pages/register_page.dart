@@ -15,10 +15,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  // exception code
-  final String userNotFoundCode = 'user-not-found';
-  final String wrongPasswordCode = 'wrong-password';
-
   // Text editing controller
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -36,23 +32,22 @@ class _RegisterPageState extends State<RegisterPage> {
     // try creating the user
     try {
       if (password == confirmPassword) {
-        FirebaseAuth.instance
+        await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
-      } else {
-        Navigator.pop(context);
-        showErrorMessage("password don't match!");
       }
 
-      // hide loading circle
       // ignore: use_build_context_synchronously
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      // hide loading circle
       // ignore: use_build_context_synchronously
       Navigator.pop(context);
 
       // handle errors
       showErrorMessage(e.code);
+    }
+
+    if (password != confirmPassword) {
+      showErrorMessage("password don't match!");
     }
   }
 
