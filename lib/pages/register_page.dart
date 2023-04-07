@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_login/components/my_button.dart';
 import 'package:simple_login/components/square_tile.dart';
 import 'package:simple_login/components/text_field.dart';
+import 'package:simple_login/services/auth_service.dart';
 
 // ignore: must_be_immutable
 class RegisterPage extends StatefulWidget {
@@ -174,14 +175,22 @@ class _RegisterPageState extends State<RegisterPage> {
                 // google + facebook sign in buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     // google button
-                    SquareTile(imagePath: 'assets/google_logo.png'),
+                    SquareTile(
+                      imagePath: 'assets/google_logo.png',
+                      onTap: () => AuthService().signWithGoogle(),
+                    ),
 
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
 
                     // facebook button
-                    SquareTile(imagePath: 'assets/facebook_logo.png'),
+                    SquareTile(
+                      imagePath: 'assets/facebook_logo.png',
+                      onTap: () {
+                        // TODO: invoke sign in with facebook method here!
+                      },
+                    ),
                   ],
                 ),
 
