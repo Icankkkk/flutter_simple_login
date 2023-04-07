@@ -1,6 +1,8 @@
-# simple_login
+# Flutter Simple Login
 
-A new Flutter project.
+User auth with Firebase and google 
+
+![](https://firebasestorage.googleapis.com/v0/b/simplelogin-9538d.appspot.com/o/Mockup%20SimpleLogin%20App.png?alt=media&token=defa2313-f99a-419b-8948-a59f2d05bfa8)
 
 ## Getting Started
 
